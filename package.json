@@ -1,0 +1,58 @@
+{
+  "name": "ccwang-api",
+  "version": "1.0.0",
+  "description": "ccwang api",
+  "main": "index.js",
+  "scripts": {
+    "start": "sls offline --port 3000 start",
+    "db:start": "sls dynamodb start --migrate",
+    "db:install": "sls dynamodb install",
+    "build": "NODE_ENV=production sls deploy --no-deploy",
+    "deploy": "NODE_ENV=production sls --stage=${DEPLOY_STAGE:-development} deploy",
+    "deploy:lambda": "sls deploy",
+    "deploy:production": "NODE_ENV=production sls --stage=${DEPLOY_STAGE:-production} deploy",
+    "logs": "sls logs --function=${LOGS_FUNCTION:-graphql} --stage=${LOGS_STAGE:-development} --tail",
+    "test:lint": "eslint .",
+    "test:unit": "NODE_ENV=test ava tests/unit/**/*.test.js",
+    "test:integration": "NODE_ENV=test ava --serial --fail-fast tests/integration/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beewang/ccwang-api.git"
+  },
+  "author": "Benny Wang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beewang/ccwang-api/issues"
+  },
+  "homepage": "https://github.com/beewang/ccwang-api#readme",
+  "dependencies": {
+    "aws-sdk": "^2.62.0",
+    "babel-polyfill": "^6.23.0",
+    "dotenv": "4.0.0",
+    "graphql": "0.10.1",
+    "graphql-tools": "1.0.0",
+    "jsonwebtoken": "7.4.1",
+    "lodash": "4.17.4",
+    "moment": "^2.17.1",
+    "serverless-dynamodb-client": "^0.0.2",
+    "uuid": "3.0.1"
+  },
+  "devDependencies": {
+    "ava": "0.19.1",
+    "babel-eslint": "7.2.3",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "15.0.1",
+    "eslint-plugin-import": "2.3.0",
+    "eslint-plugin-jsx-a11y": "5.0.3",
+    "eslint-plugin-react": "7.0.1",
+    "serverless": "^1.8.0",
+    "serverless-build-plugin": "1.5.0",
+    "serverless-dynamodb-local": "0.2.22",
+    "serverless-offline": "3.14.0"
+  }
+}

@@ -1,0 +1,12 @@
+method: bundle
+
+babel: true
+sourceMaps: false
+
+include:
+  - .babelrc
+
+functions:
+  graphql:
+    include:
+      - "graphql/**"
