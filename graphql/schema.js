@@ -34,7 +34,14 @@ schema {
 const rootResolvers = {
   Query: {
     posts: () => queryPosts(),
-    findPostById: (root, args) => findPostById(args.id),
+    findPostById: async (root, args) => {
+      const post = await findPostById(args.id)
+      if (!post) {
+        return { error: POST_NOT_FOUND}
+      }
+
+      return { post }
+    },
   },
   Mutation: {
     createPost: async (root, { input }) => {
