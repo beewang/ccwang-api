@@ -4,11 +4,14 @@ import { makeExecutableSchema } from 'graphql-tools'
 import { schema as postsSchema, resolvers as postsResolvers } from './posts'
 import { queryPosts, createPost, updatePostWithResponse, findPostById } from './posts/model'
 
+import { sendEmail } from './emails/model'
+
 import { POST_NOT_FOUND } from './utils/error'
 
 const rootSchema = [`
 enum ErrorCode {
   POST_NOT_FOUND
+  SERVER_ERROR
 }
 
 type Query {
@@ -47,6 +50,15 @@ const rootResolvers = {
     createPost: async (root, { input }) => {
       // create a new post
       const post = await createPost(input)
+      if (!post) {
+        return { error: SERVER_ERROR }
+      }
+
+      // send email
+      const email = await sendEmail()
+      if (!email) {
+        return { error: SERVER_ERROR }
+      }
 
       return { post }
     },

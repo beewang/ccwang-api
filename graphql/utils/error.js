@@ -1,2 +1,3 @@
 export const POST_NOT_FOUND = 'POST_NOT_FOUND'
 export const POST_NOT_CREATED = 'POST_NOT_CREATED'
+export const SERVER_ERROR = 'SERVER_ERROR'

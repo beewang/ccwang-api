@@ -49,7 +49,7 @@ functions:
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    PostsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
