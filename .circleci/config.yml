@@ -1,0 +1,32 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: /ccwang-api
+    docker:
+      - image: bennywang/node
+    steps:
+      - checkout
+
+      - run:
+          name: Install Node.js dependencies
+          command: yarn install
+
+      - run:
+          name: Lint Test
+          command: yarn test:lint
+
+      - run:
+          name: Unit Test
+          command: yarn test:unit
+
+      - run:
+          name: Build
+          command: yarn build
+
+      - run:
+          name: Deploy to production
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              yarn deploy:production
+            fi
