@@ -6,7 +6,7 @@ import { queryPosts, createPost, updatePostWithResponse, findPostById } from './
 
 import { sendEmail } from './emails/model'
 
-import { POST_NOT_FOUND } from './utils/error'
+import { POST_NOT_FOUND, SERVER_ERROR } from './utils/error'
 
 const rootSchema = [`
 enum ErrorCode {
@@ -40,7 +40,7 @@ const rootResolvers = {
     findPostById: async (root, args) => {
       const post = await findPostById(args.id)
       if (!post) {
-        return { error: POST_NOT_FOUND}
+        return { error: POST_NOT_FOUND }
       }
 
       return { post }
