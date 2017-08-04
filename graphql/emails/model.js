@@ -24,13 +24,7 @@ export const sendEmail = async () => {
     Source: 'bennywang200@gmail.com',
   }
 
-  await ses.sendEmail(emailParams, (err, data) => {
-    if (err) {
-      return null
-    }
-
-    return data
-  })
+  return ses.sendEmail(emailParams).promise()
 }
 
 export default {}

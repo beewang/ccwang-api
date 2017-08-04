@@ -1,0 +1,23 @@
+enum ErrorCode {
+  POST_NOT_FOUND
+  SERVER_ERROR
+}
+
+type Query {
+  # List all posts
+  posts: [Post]
+
+  # Find post by id
+  findPostById(id: String!) : PostResponse
+}
+
+type Mutation {
+  # Create new Post
+  createPost(input: PostInput!): PostResponse
+  updatePostWithResponse(input: PostUpdateInput): PostResponse
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

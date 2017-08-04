@@ -1,3 +1,5 @@
+import fs from 'fs'
+import { join } from 'path'
 import { merge } from 'lodash'
 import { makeExecutableSchema } from 'graphql-tools'
 
@@ -8,31 +10,7 @@ import { sendEmail } from './emails/model'
 
 import { POST_NOT_FOUND, SERVER_ERROR } from './utils/error'
 
-const rootSchema = [`
-enum ErrorCode {
-  POST_NOT_FOUND
-  SERVER_ERROR
-}
-
-type Query {
-  # List all posts
-  posts: [Post]
-
-  # Find post by id
-  findPostById(id: String!) : PostResponse
-}
-
-type Mutation {
-  # Create new Post
-  createPost(input: PostInput!): PostResponse
-  updatePostWithResponse(input: PostUpdateInput): PostResponse
-}
-
-schema {
-  query: Query
-  mutation: Mutation
-}
-`]
+const rootSchema = [fs.readFileSync(join(__dirname, 'schema.graphql'), 'utf-8')]
 
 const rootResolvers = {
   Query: {
@@ -56,6 +34,7 @@ const rootResolvers = {
 
       // send email
       const email = await sendEmail()
+
       if (!email) {
         return { error: SERVER_ERROR }
       }

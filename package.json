@@ -4,7 +4,7 @@
   "description": "ccwang api",
   "main": "index.js",
   "scripts": {
-    "start": "sls offline start",
+    "start": "sls offline --port 8090 start | bunyan",
     "db:start": "sls dynamodb start --migrate",
     "db:install": "sls dynamodb install",
     "db:fix": "kill $(lsof -i tcp:8000 | awk 'FNR == 2 {print $2}')",
@@ -31,6 +31,7 @@
   "dependencies": {
     "aws-sdk": "^2.62.0",
     "babel-polyfill": "^6.23.0",
+    "bunyan": "^1.8.10",
     "dotenv": "4.0.0",
     "graphql": "0.10.1",
     "graphql-tools": "1.0.0",

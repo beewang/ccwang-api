@@ -1,34 +1,7 @@
-export const schema = [`
-input PostInput {
-  name: String!
-  title: String!
-  content: String!
-  reply: String
-  email: String!
-  title: String!
-}
+import fs from 'fs'
+import { join } from 'path'
 
-input PostUpdateInput {
-  id: String!
-  reply: String!
-}
-
-type PostResponse {
-  post: Post
-  error: ErrorCode
-}
-
-type Post {
-  id: ID!
-  name: String!
-  title: String!
-  content: String!
-  reply: String
-  email: String!
-  createdAt: String!
-  updatedAt: String!
-}
-`]
+export const schema = [fs.readFileSync(join(__dirname, 'schema.graphql'), 'utf-8')]
 
 export const resolvers = {}
 

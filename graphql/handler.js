@@ -1,8 +1,5 @@
 import { graphql } from 'graphql'
-import dotenv from 'dotenv'
 import schema from './schema'
-
-dotenv.config()
 
 export const handler = (event, _, callback) => {
   const { query, variables } = event.body
